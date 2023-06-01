@@ -29,6 +29,6 @@ app.use(errorLogger);
 app.use(errors());
 app.use(handlerErrors);
 
-app.listen(NODE_ENV === 'production' ? PORT : 3001, () => {
-  console.log('Сервер на порту 3001');
+app.listen(NODE_ENV === 'production' ? PORT : 3000, () => {
+  console.log('Сервер на порту 3000');
 });
