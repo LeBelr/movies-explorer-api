@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
 require('dotenv').config();
-const cors = require('./middlewares/cors');
+const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const rateLimiter = require('./middlewares/rateLimiter');
 const router = require('./routes');
@@ -13,9 +13,13 @@ const { NODE_ENV, PORT, DB_PATH } = process.env;
 
 const app = express();
 
-mongoose.connect(NODE_ENV === 'production' ? DB_PATH : 'mongodb://127.0.0.1:27017/bitfilmsdb');
+app.use(cors({
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: ['Content-Type', 'authorization'],
+}));
 
-app.use(cors);
+mongoose.connect(NODE_ENV === 'production' ? DB_PATH : 'mongodb://127.0.0.1:27017/bitfilmsdb');
 
 app.use(requestLogger);
 
