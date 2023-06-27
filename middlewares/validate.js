@@ -1,17 +1,15 @@
 const { celebrate, Joi } = require('celebrate');
-const httpRegEx = require('../utils/regEx');
-const { emailRegEx } = require('../utils/regEx');
 
 const validateChangeUserInfo = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required().regex(emailRegEx),
+    email: Joi.string().required(),
     name: Joi.string().required().min(2).max(30),
   }),
 });
 
 const validateCreateUser = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required().regex(emailRegEx),
+    email: Joi.string().required(),
     password: Joi.string().required(),
     name: Joi.string().required().min(2).max(30),
   }),
@@ -19,7 +17,7 @@ const validateCreateUser = celebrate({
 
 const validateLogin = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required().regex(emailRegEx),
+    email: Joi.string().required(),
     password: Joi.string().required(),
   }),
 });
@@ -31,9 +29,9 @@ const validateCreateMovie = celebrate({
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
-    image: Joi.string().required().regex(httpRegEx),
-    trailerLink: Joi.string().required().regex(httpRegEx),
-    thumbnail: Joi.string().required().regex(httpRegEx),
+    image: Joi.string().required(),
+    trailerLink: Joi.string().required(),
+    thumbnail: Joi.string().required(),
     movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
