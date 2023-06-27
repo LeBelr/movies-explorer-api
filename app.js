@@ -14,9 +14,10 @@ const { NODE_ENV, PORT, DB_PATH } = process.env;
 const app = express();
 
 app.use(cors({
-  origin: '*',
+  origin: ['http://localhost:3000', 'https://localhost:3000', 'https://mvs.nomoredomains.rocks', 'http://mvs.nomoredomains.rocks', 'https://api.mvs.nomoredomains.rocks', 'http://api.mvs.nomoredomains.rocks'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  allowedHeaders: ['Content-Type', 'authorization'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
 }));
 
 mongoose.connect(NODE_ENV === 'production' ? DB_PATH : 'mongodb://127.0.0.1:27017/bitfilmsdb');
