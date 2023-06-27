@@ -1,4 +1,4 @@
-export default function cors(req, res, next) {
+function cors(req, res, next) {
   const { method } = req;
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
   const requestHeaders = req.headers['access-control-request-headers'];
@@ -13,3 +13,5 @@ export default function cors(req, res, next) {
   }
   return next();
 }
+
+module.exports = cors;
