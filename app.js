@@ -13,21 +13,7 @@ const { NODE_ENV, PORT, DB_PATH } = process.env;
 
 const app = express();
 
-app.use((req, res, next) => {
-  const { method } = req;
-  const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
-  const requestHeaders = req.headers['access-control-request-headers'];
-
-  res.header('Access-Control-Allow-Origin', '*');
-
-  if (method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-    res.header('Access-Control-Allow-Headers', requestHeaders);
-
-    return res.end();
-  }
-  next();
-});
+app.use(cors());
 
 mongoose.connect(NODE_ENV === 'production' ? DB_PATH : 'mongodb://127.0.0.1:27017/bitfilmsdb');
 

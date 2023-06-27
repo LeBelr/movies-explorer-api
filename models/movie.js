@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const httpRegEx = require('../utils/regEx');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -25,32 +24,14 @@ const movieSchema = new mongoose.Schema({
   image: {
     type: String,
     required: true,
-    validate: {
-      validator(link) {
-        return httpRegEx.test(link);
-      },
-      message: 'Некорректный URL постера',
-    },
   },
   trailerLink: {
     type: String,
     required: true,
-    validate: {
-      validator(link) {
-        return httpRegEx.test(link);
-      },
-      message: 'Некорректный URL трейлера',
-    },
   },
   thumbnail: {
     type: String,
     required: true,
-    validate: {
-      validator(link) {
-        return httpRegEx.test(link);
-      },
-      message: 'Некорректный URL мини-постера',
-    },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
